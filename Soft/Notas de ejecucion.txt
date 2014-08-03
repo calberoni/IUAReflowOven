@@ -1,0 +1,7 @@
+Para poder correr el ejecutable del instrumento virtual hay que bajar
+el runtime library de NI y ademas para el manejo de los puertos 
+tenemos que tener instalado el driver VISA
+
+http://joule.ni.com/nidu/cds/view/p/id/861/lang/en  --> run-time engine
+
+http://joule.ni.com/nidu/cds/view/p/id/2914/   --->driver visa

@@ -1,0 +1,162 @@
+Protel Design System Design Rule Check
+PCB File : D:\facu\Horno IUA\Hard\Modulo conversor AD\PCB_ADC.PcbDoc
+Date     : 23/03/2014
+Time     : 01:48:58 p.m.
+
+Processing Rule : Short-Circuit Constraint (Allowed=No) (All),(All)
+Rule Violations :0
+
+Processing Rule : Un-Routed Net Constraint ( (All) )
+Rule Violations :0
+
+Processing Rule : Clearance Constraint (Gap=0.2mm) (All),(All)
+   Violation between Track (108.204mm,50.8mm)(111.506mm,50.8mm)  Bottom Layer and 
+                     Pad U1-1(110.76mm,51.93701mm)  Bottom Layer
+   Violation between Track (111.506mm,50.8mm)(111.76mm,51.054mm)  Bottom Layer and 
+                     Pad U1-2(111.26003mm,51.93701mm)  Bottom Layer
+   Violation between Track (108.204mm,50.8mm)(111.506mm,50.8mm)  Bottom Layer and 
+                     Pad U1-2(111.26003mm,51.93701mm)  Bottom Layer
+Rule Violations :3
+
+Processing Rule : Power Plane Connect Rule(Relief Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (All)
+Rule Violations :0
+
+Processing Rule : Width Constraint (Min=0.3mm) (Max=0.7mm) (Preferred=0.4mm) (All)
+Rule Violations :0
+
+Processing Rule : Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (All)
+Rule Violations :0
+
+Processing Rule : Hole Size Constraint (Min=0.0254mm) (Max=2.54mm) (All)
+Rule Violations :0
+
+Processing Rule : Hole To Hole Clearance (Gap=0.254mm) (All),(All)
+Rule Violations :0
+
+Processing Rule : Minimum Solder Mask Sliver (Gap=0.254mm) (All),(All)
+   Violation between Pad U1-2(111.26003mm,51.93701mm)  Bottom Layer and 
+                     Pad U1-1(110.76mm,51.93701mm)  Bottom Layer
+   Violation between Pad U1-3(111.76mm,51.93701mm)  Bottom Layer and 
+                     Pad U1-2(111.26003mm,51.93701mm)  Bottom Layer
+   Violation between Pad U1-4(112.26002mm,51.93701mm)  Bottom Layer and 
+                     Pad U1-5(112.76mm,51.93701mm)  Bottom Layer
+   Violation between Pad U1-4(112.26002mm,51.93701mm)  Bottom Layer and 
+                     Pad U1-3(111.76mm,51.93701mm)  Bottom Layer
+   Violation between Pad U1-7(112.26002mm,48.65202mm)  Bottom Layer and 
+                     Pad U1-6(112.76mm,48.65202mm)  Bottom Layer
+   Violation between Pad U1-8(111.76mm,48.65202mm)  Bottom Layer and 
+                     Pad U1-7(112.26002mm,48.65202mm)  Bottom Layer
+   Violation between Pad U1-9(111.26003mm,48.65202mm)  Bottom Layer and 
+                     Pad U1-8(111.76mm,48.65202mm)  Bottom Layer
+   Violation between Pad U1-10(110.76mm,48.65202mm)  Bottom Layer and 
+                     Pad U1-9(111.26003mm,48.65202mm)  Bottom Layer
+Rule Violations :8
+
+Processing Rule : Silkscreen Over Component Pads (Clearance=0.254mm) (All),(All)
+   Violation between Text "R8" (101.981mm,52.832mm)  Top Overlay and 
+                     Pad C8-1(101.981mm,52.959mm)  Multi-Layer
+   Violation between Track (96.901mm,55.753mm)(97.1296mm,55.753mm)  Top Overlay and 
+                     Pad R7-1(98.171mm,55.753mm)  Multi-Layer
+   Violation between Track (91.5924mm,55.753mm)(91.821mm,55.753mm)  Top Overlay and 
+                     Pad R7-2(90.551mm,55.753mm)  Multi-Layer
+   Violation between Track (96.52mm,33.02mm)(96.7486mm,33.02mm)  Top Overlay and 
+                     Pad R3-1(97.79mm,33.02mm)  Multi-Layer
+   Violation between Track (91.2114mm,33.02mm)(91.44mm,33.02mm)  Top Overlay and 
+                     Pad R3-2(90.17mm,33.02mm)  Multi-Layer
+   Violation between Track (91.2114mm,48.26mm)(91.44mm,48.26mm)  Top Overlay and 
+                     Pad R1-1(90.17mm,48.26mm)  Multi-Layer
+   Violation between Track (96.52mm,48.26mm)(96.7486mm,48.26mm)  Top Overlay and 
+                     Pad R1-2(97.79mm,48.26mm)  Multi-Layer
+   Violation between Track (91.7194mm,52.324mm)(91.948mm,52.324mm)  Top Overlay and 
+                     Pad R8-1(90.678mm,52.324mm)  Multi-Layer
+   Violation between Text "R1" (89.6112mm,49.8856mm)  Top Overlay and 
+                     Pad R8-1(90.678mm,52.324mm)  Multi-Layer
+   Violation between Track (97.028mm,52.324mm)(97.2566mm,52.324mm)  Top Overlay and 
+                     Pad R8-2(98.298mm,52.324mm)  Multi-Layer
+   Violation between Track (97.028mm,71.628mm)(97.2566mm,71.628mm)  Top Overlay and 
+                     Pad R6-1(98.298mm,71.628mm)  Multi-Layer
+   Violation between Track (91.7194mm,71.628mm)(91.948mm,71.628mm)  Top Overlay and 
+                     Pad R6-2(90.678mm,71.628mm)  Multi-Layer
+   Violation between Track (96.52mm,44.704mm)(96.7486mm,44.704mm)  Top Overlay and 
+                     Pad R2-1(97.79mm,44.704mm)  Multi-Layer
+   Violation between Text "R2" (86.995mm,43.942mm)  Top Overlay and 
+                     Pad R2-2(90.17mm,44.704mm)  Multi-Layer
+   Violation between Track (91.2114mm,44.704mm)(91.44mm,44.704mm)  Top Overlay and 
+                     Pad R2-2(90.17mm,44.704mm)  Multi-Layer
+   Violation between Track (91.2114mm,29.464mm)(91.44mm,29.464mm)  Top Overlay and 
+                     Pad R4-1(90.17mm,29.464mm)  Multi-Layer
+   Violation between Text "R4" (86.741mm,28.829mm)  Top Overlay and 
+                     Pad R4-1(90.17mm,29.464mm)  Multi-Layer
+   Violation between Track (96.52mm,29.464mm)(96.7486mm,29.464mm)  Top Overlay and 
+                     Pad R4-2(97.79mm,29.464mm)  Multi-Layer
+   Violation between Track (91.7194mm,68.58mm)(91.948mm,68.58mm)  Top Overlay and 
+                     Pad R5-1(90.678mm,68.58mm)  Multi-Layer
+   Violation between Track (97.028mm,68.58mm)(97.2566mm,68.58mm)  Top Overlay and 
+                     Pad R5-2(98.298mm,68.58mm)  Multi-Layer
+   Violation between Text "*" (111.633mm,52.6288mm)  Bottom Overlay and 
+                     Pad U1-1(110.76mm,51.93701mm)  Bottom Layer
+   Violation between Text "*" (111.633mm,52.6288mm)  Bottom Overlay and 
+                     Pad U1-2(111.26003mm,51.93701mm)  Bottom Layer
+   Violation between Text "*" (111.633mm,52.6288mm)  Bottom Overlay and 
+                     Pad U1-3(111.76mm,51.93701mm)  Bottom Layer
+Rule Violations :23
+
+Processing Rule : Silk to Silk (Clearance=0.254mm) (All),(All)
+   Violation between Text "R8" (101.981mm,52.832mm)  Top Overlay and 
+                     Track (100.381mm,51.67899mm)(103.581mm,51.67899mm)  Top Overlay
+   Violation between Text "R8" (101.981mm,52.832mm)  Top Overlay and 
+                     Track (100.381mm,51.67899mm)(100.381mm,56.77901mm)  Top Overlay
+   Violation between Text "R3" (89.6112mm,34.6456mm)  Top Overlay and 
+                     Track (92.38mm,35.54999mm)(95.58mm,35.54999mm)  Top Overlay
+   Violation between Text "R3" (89.6112mm,34.6456mm)  Top Overlay and 
+                     Track (92.38mm,35.54999mm)(92.38mm,40.65001mm)  Top Overlay
+   Violation between Text "*" (111.633mm,52.6288mm)  Bottom Overlay and 
+                     Track (110.2106mm,48.7426mm)(110.2106mm,51.8414mm)  Bottom Overlay
+   Violation between Text "R8" (101.981mm,52.832mm)  Top Overlay and 
+                     Text "C1" (100.6602mm,49.6316mm)  Top Overlay
+Rule Violations :6
+
+Processing Rule : Net Antennae (Tolerance=0mm) (All)
+Rule Violations :0
+
+Processing Rule : Room EsquematicoAD (Bounding Region = (178.943mm, 24.384mm, 290.83mm, 42.672mm) (InComponentClass('EsquematicoAD'))
+   Violation between Room Definition Between Component on TopLayer And Rule on TopLayer
+   Violation between Room Definition Between Component on TopLayer And Rule on TopLayer
+   Violation between Room Definition Between Component on TopLayer And Rule on TopLayer
+   Violation between Room Definition Between Component on TopLayer And Rule on TopLayer
+   Violation between Room Definition Between Component on TopLayer And Rule on TopLayer
+   Violation between Room Definition Between Component on TopLayer And Rule on TopLayer
+   Violation between Room Definition Between Component on TopLayer And Rule on TopLayer
+   Violation between Room Definition Between Component on TopLayer And Rule on TopLayer
+   Violation between Room Definition Between Component on TopLayer And Rule on TopLayer
+   Violation between Room Definition Between Component on TopLayer And Rule on TopLayer
+   Violation between Room Definition Between Component on TopLayer And Rule on TopLayer
+   Violation between Room Definition Between Component on TopLayer And Rule on TopLayer
+   Violation between Room Definition Between Component on TopLayer And Rule on TopLayer
+   Violation between Room Definition Between Component on TopLayer And Rule on TopLayer
+   Violation between Room Definition Between Component on TopLayer And Rule on TopLayer
+   Violation between Room Definition Between Component on TopLayer And Rule on TopLayer
+   Violation between Room Definition Between Component on TopLayer And Rule on TopLayer
+   Violation between Room Definition Between Component on TopLayer And Rule on TopLayer
+   Violation between Room Definition Between Component on TopLayer And Rule on TopLayer
+   Violation between Room Definition Between Component on TopLayer And Rule on TopLayer
+   Violation between Room Definition Between Component on TopLayer And Rule on TopLayer
+   Violation between Room Definition Between Component on BottomLayer And Rule on TopLayer
+Rule Violations :22
+
+Processing Rule : SMD Neck-Down Constraint (Percent=100%) (All)
+   Violation between SMD Neck-Down Constraint Between Pad on BottomLayer And Track on BottomLayer
+   Violation between SMD Neck-Down Constraint Between Pad on BottomLayer And Track on BottomLayer
+   Violation between SMD Neck-Down Constraint Between Pad on BottomLayer And Track on BottomLayer
+   Violation between SMD Neck-Down Constraint Between Pad on BottomLayer And Track on BottomLayer
+   Violation between SMD Neck-Down Constraint Between Pad on BottomLayer And Track on BottomLayer
+   Violation between SMD Neck-Down Constraint Between Pad on BottomLayer And Track on BottomLayer
+   Violation between SMD Neck-Down Constraint Between Pad on BottomLayer And Track on BottomLayer
+   Violation between SMD Neck-Down Constraint Between Pad on BottomLayer And Track on BottomLayer
+   Violation between SMD Neck-Down Constraint Between Pad on BottomLayer And Track on BottomLayer
+   Violation between SMD Neck-Down Constraint Between Pad on BottomLayer And Track on BottomLayer
+Rule Violations :10
+
+
+Violations Detected : 72
+Time Elapsed        : 00:00:00

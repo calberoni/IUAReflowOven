@@ -1,0 +1,467 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : sans-serif;
+			color : white;
+			background-color : #21489e;
+			padding: 0.3em;
+		}
+		body {
+			font-family : verdana;
+		}
+		td, th {
+			padding: 0.5em;
+			text-align : center;
+			width : 18%;
+		}
+		th {
+			background-color : #A6CAF0;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+		}
+		
+		.DRC_summary_header {							
+			padding-bottom : 0.1em;
+			border : 0px solid black;							
+			width: 100%;
+                        align: right;
+                        
+		}
+
+		.DRC_summary_header_col1, 
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3
+		{
+			color : black;
+			font-size:150%;
+                        padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2: 0em;
+			border : 0px solid black;
+			width : auto;
+			vertical-align: top;
+			font-weight: bold;				
+		}
+		
+		.DRC_summary_header_col1 	
+		{		                       
+			text-align: right;
+                        width: auto;	
+		}
+
+		.DRC_summary_header_col2 	
+		{		
+			text-align: center;	
+		}
+
+		.DRC_summary_header_col3 	
+		{		
+			text-align: left;	
+		}
+
+
+		
+		.header_holder
+		{
+		Width = 100%;
+		border = 0px solid green;
+		padding = 0;
+		}
+		
+		
+		
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+                {
+			left:0;
+			top:0;
+			padding-top : 0.1em;			
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top
+
+		}
+		.front_matter {	
+			
+			margin-top: 5px;
+ 			margin-left: 0px;					 			
+ 			horizontal-align: left;
+		}
+				
+		
+		.front_matter_column1 {
+			width : 10em;	
+			text-align  : right;
+			padding-right:0.1em;
+			
+		}
+		
+		.front_matter_column2 {
+                        width: 0.1em;
+			align: center;
+			text-align : center;
+			margin-right  : 0.1em;	
+			margin-left   : 0.1em;
+		}
+		.front_matter_column3 {
+			width         : auto;  
+			text-align    : left;	
+			margin-right  : 0.5em;				
+		}
+		
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : right;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #EEEEE0 
+		}
+		tr.onmouseout_even { 
+			background-color : #F3F3E3   
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : lightYellow
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #008000 
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script></head>
+<body onload=""><img ALT="Altium" src="
+			file://F:\PROGRAM FILES (X86)\ALTIUM DESIGNER SUMMER 09\Templates\AD-rgb_logo_223x64.gif
+		"><a href="dxpprocess://Client:SetupPreferences?Server=PCB|PageName=Reports" class="customize"><acronym title="dxpprocess://Client:SetupPreferences?Server=PCB|PageName=Reports">customize</acronym></a><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td Style="width:70%">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date</td>
+<td class="front_matter_column2">:</td>
+<td class="front_matter_column3">17/10/2013</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time</td>
+<td class="front_matter_column2">:</td>
+<td class="front_matter_column3">08:59:22 p.m.</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time</td>
+<td class="front_matter_column2">:</td>
+<td class="front_matter_column3">00:00:00</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename</td>
+<td class="front_matter_column2">:</td>
+<td class="front_matter_column3"><a href="file:///F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc" class="file"><acronym title="F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc">F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td Style="Width:30%">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings</td>
+<td class="DRC_summary_header_col2">:</td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations</td>
+<td class="DRC_summary_header_col2">:</td>
+<td class="DRC_summary_header_col3" style="color : red">30</td></tr>
+</table>
+</td>
+</table>
+<hr><a name="IDATACZK"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDAFBCZK">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDALBCZK">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDARBCZK">Clearance Constraint (Gap=0.2mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDAXBCZK">Power Plane Connect Rule(Relief Connect )(Expansion=0.508mm) (Conductor Width=0.5mm) (Air Gap=0.254mm) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDA3BCZK">Width Constraint (Min=1mm) (Max=3mm) (Preferred=1mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDADCCZK">Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDAJCCZK">Hole Size Constraint (Min=0.0254mm) (Max=2.54mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDAPCCZK">Hole To Hole Clearance (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDAVCCZK">Minimum Solder Mask Sliver (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDA1CCZK">Silkscreen Over Component Pads (Clearance=0.254mm) (All),(All)</a></td>
+<td class="column2">23</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDATRCZK">Silk to Silk (Clearance=0.254mm) (All),(All)</a></td>
+<td class="column2">7</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDAYTCZK">Net Antennae (Tolerance=0mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDA4TCZK">Room MODULO CONTROL (Bounding Region = (71.12mm, 51.562mm, 140.716mm, 108.077mm) (InComponentClass('MODULO CONTROL'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDAEUCZK">Width Constraint (Min=3mm) (Max=3mm) (Preferred=3mm) ((InNet('NetC1_1')))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">30</td>
+</tr>
+</table><br><hr><a name="IDA1CCZK"><table>
+<tr>
+<th style="text-align : left" colspan="2" class="rule">Silkscreen Over Component Pads (Clearance=0.254mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5076.063mil|Location2.X=5123.937mil|Location1.Y=2236.063mil|Location2.Y=2243.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5076.063mil|Location2.X=5123.937mil|Location1.Y=2236.063mil|Location2.Y=2243.937mil|Absolute=True">Track (57.912mm,5.334mm)(58.928mm,5.334mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5104.882mil|Location2.X=5215.118mil|Location1.Y=2184.882mil|Location2.Y=2295.118mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5104.882mil|Location2.X=5215.118mil|Location1.Y=2184.882mil|Location2.Y=2295.118mil|Absolute=True">Pad R10-2(59.944mm,5.334mm)  Multi-Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4796.063mil|Location2.X=4843.937mil|Location1.Y=2236.063mil|Location2.Y=2243.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4796.063mil|Location2.X=4843.937mil|Location1.Y=2236.063mil|Location2.Y=2243.937mil|Absolute=True">Track (50.8mm,5.334mm)(51.816mm,5.334mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4704.882mil|Location2.X=4815.118mil|Location1.Y=2184.882mil|Location2.Y=2295.118mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4704.882mil|Location2.X=4815.118mil|Location1.Y=2184.882mil|Location2.Y=2295.118mil|Absolute=True">Pad R10-1(49.784mm,5.334mm)  Multi-Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4016.063mil|Location2.X=4023.937mil|Location1.Y=2756.063mil|Location2.Y=2803.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4016.063mil|Location2.X=4023.937mil|Location1.Y=2756.063mil|Location2.Y=2803.937mil|Absolute=True">Track (30.988mm,18.542mm)(30.988mm,19.558mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3964.882mil|Location2.X=4075.118mil|Location1.Y=2664.882mil|Location2.Y=2775.118mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3964.882mil|Location2.X=4075.118mil|Location1.Y=2664.882mil|Location2.Y=2775.118mil|Absolute=True">Pad R8-2(30.988mm,17.526mm)  Multi-Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4016.063mil|Location2.X=4023.937mil|Location1.Y=3036.063mil|Location2.Y=3083.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4016.063mil|Location2.X=4023.937mil|Location1.Y=3036.063mil|Location2.Y=3083.937mil|Absolute=True">Track (30.988mm,25.654mm)(30.988mm,26.67mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3964.882mil|Location2.X=4075.118mil|Location1.Y=3064.882mil|Location2.Y=3175.118mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3964.882mil|Location2.X=4075.118mil|Location1.Y=3064.882mil|Location2.Y=3175.118mil|Absolute=True">Pad R8-1(30.988mm,27.686mm)  Multi-Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4176.063mil|Location2.X=4183.937mil|Location1.Y=3036.063mil|Location2.Y=3083.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4176.063mil|Location2.X=4183.937mil|Location1.Y=3036.063mil|Location2.Y=3083.937mil|Absolute=True">Track (35.052mm,25.654mm)(35.052mm,26.67mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4124.882mil|Location2.X=4235.118mil|Location1.Y=3064.882mil|Location2.Y=3175.118mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4124.882mil|Location2.X=4235.118mil|Location1.Y=3064.882mil|Location2.Y=3175.118mil|Absolute=True">Pad R9-2(35.052mm,27.686mm)  Multi-Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4176.063mil|Location2.X=4183.937mil|Location1.Y=2756.063mil|Location2.Y=2803.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4176.063mil|Location2.X=4183.937mil|Location1.Y=2756.063mil|Location2.Y=2803.937mil|Absolute=True">Track (35.052mm,18.542mm)(35.052mm,19.558mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4124.882mil|Location2.X=4235.118mil|Location1.Y=2664.882mil|Location2.Y=2775.118mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4124.882mil|Location2.X=4235.118mil|Location1.Y=2664.882mil|Location2.Y=2775.118mil|Absolute=True">Pad R9-1(35.052mm,17.526mm)  Multi-Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5016.063mil|Location2.X=5063.937mil|Location1.Y=3956.063mil|Location2.Y=3963.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5016.063mil|Location2.X=5063.937mil|Location1.Y=3956.063mil|Location2.Y=3963.937mil|Absolute=True">Track (56.388mm,49.022mm)(57.404mm,49.022mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5044.882mil|Location2.X=5155.118mil|Location1.Y=3904.882mil|Location2.Y=4015.118mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5044.882mil|Location2.X=5155.118mil|Location1.Y=3904.882mil|Location2.Y=4015.118mil|Absolute=True">Pad R7-2(58.42mm,49.022mm)  Multi-Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4736.063mil|Location2.X=4783.937mil|Location1.Y=3956.063mil|Location2.Y=3963.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4736.063mil|Location2.X=4783.937mil|Location1.Y=3956.063mil|Location2.Y=3963.937mil|Absolute=True">Track (49.276mm,49.022mm)(50.292mm,49.022mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4644.882mil|Location2.X=4755.118mil|Location1.Y=3904.882mil|Location2.Y=4015.118mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4644.882mil|Location2.X=4755.118mil|Location1.Y=3904.882mil|Location2.Y=4015.118mil|Absolute=True">Pad R7-1(48.26mm,49.022mm)  Multi-Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5016.063mil|Location2.X=5063.937mil|Location1.Y=4136.063mil|Location2.Y=4143.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5016.063mil|Location2.X=5063.937mil|Location1.Y=4136.063mil|Location2.Y=4143.937mil|Absolute=True">Track (56.388mm,53.594mm)(57.404mm,53.594mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5044.882mil|Location2.X=5155.118mil|Location1.Y=4084.882mil|Location2.Y=4195.118mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5044.882mil|Location2.X=5155.118mil|Location1.Y=4084.882mil|Location2.Y=4195.118mil|Absolute=True">Pad R6-2(58.42mm,53.594mm)  Multi-Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4736.063mil|Location2.X=4783.937mil|Location1.Y=4136.063mil|Location2.Y=4143.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4736.063mil|Location2.X=4783.937mil|Location1.Y=4136.063mil|Location2.Y=4143.937mil|Absolute=True">Track (49.276mm,53.594mm)(50.292mm,53.594mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4644.882mil|Location2.X=4755.118mil|Location1.Y=4084.882mil|Location2.Y=4195.118mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4644.882mil|Location2.X=4755.118mil|Location1.Y=4084.882mil|Location2.Y=4195.118mil|Absolute=True">Pad R6-1(48.26mm,53.594mm)  Multi-Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3856.063mil|Location2.X=3863.937mil|Location1.Y=2756.063mil|Location2.Y=2803.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3856.063mil|Location2.X=3863.937mil|Location1.Y=2756.063mil|Location2.Y=2803.937mil|Absolute=True">Track (26.924mm,18.542mm)(26.924mm,19.558mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3804.882mil|Location2.X=3915.118mil|Location1.Y=2664.882mil|Location2.Y=2775.118mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3804.882mil|Location2.X=3915.118mil|Location1.Y=2664.882mil|Location2.Y=2775.118mil|Absolute=True">Pad R4-2(26.924mm,17.526mm)  Multi-Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3856.063mil|Location2.X=3863.937mil|Location1.Y=3036.063mil|Location2.Y=3083.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3856.063mil|Location2.X=3863.937mil|Location1.Y=3036.063mil|Location2.Y=3083.937mil|Absolute=True">Track (26.924mm,25.654mm)(26.924mm,26.67mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3804.882mil|Location2.X=3915.118mil|Location1.Y=3064.882mil|Location2.Y=3175.118mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3804.882mil|Location2.X=3915.118mil|Location1.Y=3064.882mil|Location2.Y=3175.118mil|Absolute=True">Pad R4-1(26.924mm,27.686mm)  Multi-Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5036.063mil|Location2.X=5043.937mil|Location1.Y=2956.063mil|Location2.Y=3003.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5036.063mil|Location2.X=5043.937mil|Location1.Y=2956.063mil|Location2.Y=3003.937mil|Absolute=True">Track (56.896mm,23.622mm)(56.896mm,24.638mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4984.882mil|Location2.X=5095.118mil|Location1.Y=2984.882mil|Location2.Y=3095.118mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4984.882mil|Location2.X=5095.118mil|Location1.Y=2984.882mil|Location2.Y=3095.118mil|Absolute=True">Pad R3-2(56.896mm,25.654mm)  Multi-Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5036.063mil|Location2.X=5043.937mil|Location1.Y=2676.063mil|Location2.Y=2723.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5036.063mil|Location2.X=5043.937mil|Location1.Y=2676.063mil|Location2.Y=2723.937mil|Absolute=True">Track (56.896mm,16.51mm)(56.896mm,17.526mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4984.882mil|Location2.X=5095.118mil|Location1.Y=2584.882mil|Location2.Y=2695.118mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4984.882mil|Location2.X=5095.118mil|Location1.Y=2584.882mil|Location2.Y=2695.118mil|Absolute=True">Pad R3-1(56.896mm,15.494mm)  Multi-Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4556.063mil|Location2.X=4603.937mil|Location1.Y=2316.063mil|Location2.Y=2323.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4556.063mil|Location2.X=4603.937mil|Location1.Y=2316.063mil|Location2.Y=2323.937mil|Absolute=True">Track (44.704mm,7.366mm)(45.72mm,7.366mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4584.882mil|Location2.X=4695.118mil|Location1.Y=2264.882mil|Location2.Y=2375.118mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4584.882mil|Location2.X=4695.118mil|Location1.Y=2264.882mil|Location2.Y=2375.118mil|Absolute=True">Pad R1-2(46.736mm,7.366mm)  Multi-Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4276.063mil|Location2.X=4323.937mil|Location1.Y=2316.063mil|Location2.Y=2323.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4276.063mil|Location2.X=4323.937mil|Location1.Y=2316.063mil|Location2.Y=2323.937mil|Absolute=True">Track (37.592mm,7.366mm)(38.608mm,7.366mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4184.882mil|Location2.X=4295.118mil|Location1.Y=2264.882mil|Location2.Y=2375.118mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4184.882mil|Location2.X=4295.118mil|Location1.Y=2264.882mil|Location2.Y=2375.118mil|Absolute=True">Pad R1-1(36.576mm,7.366mm)  Multi-Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4193mil|Location2.X=4312.968mil|Location1.Y=2227mil|Location2.Y=2306.981mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4193mil|Location2.X=4312.968mil|Location1.Y=2227mil|Location2.Y=2306.981mil|Absolute=True">Text "R2" (35.6362mm,5.2578mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4184.882mil|Location2.X=4295.118mil|Location1.Y=2264.882mil|Location2.Y=2375.118mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4184.882mil|Location2.X=4295.118mil|Location1.Y=2264.882mil|Location2.Y=2375.118mil|Absolute=True">Pad R1-1(36.576mm,7.366mm)  Multi-Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4276.063mil|Location2.X=4323.937mil|Location1.Y=2156.063mil|Location2.Y=2163.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4276.063mil|Location2.X=4323.937mil|Location1.Y=2156.063mil|Location2.Y=2163.937mil|Absolute=True">Track (37.592mm,3.302mm)(38.608mm,3.302mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4184.882mil|Location2.X=4295.118mil|Location1.Y=2104.882mil|Location2.Y=2215.118mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4184.882mil|Location2.X=4295.118mil|Location1.Y=2104.882mil|Location2.Y=2215.118mil|Absolute=True">Pad R2-2(36.576mm,3.302mm)  Multi-Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4556.063mil|Location2.X=4603.937mil|Location1.Y=2156.063mil|Location2.Y=2163.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4556.063mil|Location2.X=4603.937mil|Location1.Y=2156.063mil|Location2.Y=2163.937mil|Absolute=True">Track (44.704mm,3.302mm)(45.72mm,3.302mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4584.882mil|Location2.X=4695.118mil|Location1.Y=2104.882mil|Location2.Y=2215.118mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4584.882mil|Location2.X=4695.118mil|Location1.Y=2104.882mil|Location2.Y=2215.118mil|Absolute=True">Pad R2-1(46.736mm,3.302mm)  Multi-Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4856.063mil|Location2.X=4863.937mil|Location1.Y=2966.063mil|Location2.Y=3003.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4856.063mil|Location2.X=4863.937mil|Location1.Y=2966.063mil|Location2.Y=3003.937mil|Absolute=True">Track (52.324mm,23.876mm)(52.324mm,24.638mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4804.882mil|Location2.X=4915.118mil|Location1.Y=2984.882mil|Location2.Y=3095.118mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4804.882mil|Location2.X=4915.118mil|Location1.Y=2984.882mil|Location2.Y=3095.118mil|Absolute=True">Pad D6-1(52.324mm,25.654mm)  Multi-Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4856.063mil|Location2.X=4863.937mil|Location1.Y=2676.063mil|Location2.Y=2713.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4856.063mil|Location2.X=4863.937mil|Location1.Y=2676.063mil|Location2.Y=2713.937mil|Absolute=True">Track (52.324mm,16.51mm)(52.324mm,17.272mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4804.882mil|Location2.X=4915.118mil|Location1.Y=2584.882mil|Location2.Y=2695.118mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4804.882mil|Location2.X=4915.118mil|Location1.Y=2584.882mil|Location2.Y=2695.118mil|Absolute=True">Pad D6-2(52.324mm,15.494mm)  Multi-Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3441.063mil|Location2.X=3478.937mil|Location1.Y=4129.371mil|Location2.Y=4137.245mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3441.063mil|Location2.X=3478.937mil|Location1.Y=4129.371mil|Location2.Y=4137.245mil|Absolute=True">Track (16.383mm,53.42402mm)(17.145mm,53.42402mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3349.882mil|Location2.X=3460.118mil|Location1.Y=4078.19mil|Location2.Y=4188.426mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3349.882mil|Location2.X=3460.118mil|Location1.Y=4078.19mil|Location2.Y=4188.426mil|Absolute=True">Pad D5-1(15.367mm,53.42402mm)  Multi-Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3731.063mil|Location2.X=3768.937mil|Location1.Y=4129.371mil|Location2.Y=4137.245mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3731.063mil|Location2.X=3768.937mil|Location1.Y=4129.371mil|Location2.Y=4137.245mil|Absolute=True">Track (23.749mm,53.42402mm)(24.511mm,53.42402mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3749.882mil|Location2.X=3860.118mil|Location1.Y=4078.19mil|Location2.Y=4188.426mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3749.882mil|Location2.X=3860.118mil|Location1.Y=4078.19mil|Location2.Y=4188.426mil|Absolute=True">Pad D5-2(25.527mm,53.42402mm)  Multi-Layer</acronym></a></td>
+</tr>
+</table></a><a href="#top">Back to top</a><br><br><a name="IDATRCZK"><table>
+<tr>
+<th style="text-align : left" colspan="2" class="rule">Silk to Silk (Clearance=0.254mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3486mil|Location2.X=3605.968mil|Location1.Y=3406mil|Location2.Y=3485.981mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3486mil|Location2.X=3605.968mil|Location1.Y=3406mil|Location2.Y=3485.981mil|Absolute=True">Text "D4" (17.6784mm,35.2044mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3428.386mil|Location2.X=3851.614mil|Location1.Y=3468.386mil|Location2.Y=3891.614mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3428.386mil|Location2.X=3851.614mil|Location1.Y=3468.386mil|Location2.Y=3891.614mil|Absolute=True">Arc (21.336mm,41.91mm)  Top Overlay</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4714mil|Location2.X=4813.974mil|Location1.Y=3857mil|Location2.Y=3936.981mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4714mil|Location2.X=4813.974mil|Location1.Y=3857mil|Location2.Y=3936.981mil|Absolute=True">Text "Q1" (48.8696mm,46.6598mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4776.063mil|Location2.X=5023.937mil|Location1.Y=3916.063mil|Location2.Y=3923.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4776.063mil|Location2.X=5023.937mil|Location1.Y=3916.063mil|Location2.Y=3923.937mil|Absolute=True">Track (50.292mm,48.006mm)(56.388mm,48.006mm)  Top Overlay</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4714mil|Location2.X=4813.974mil|Location1.Y=3857mil|Location2.Y=3936.981mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4714mil|Location2.X=4813.974mil|Location1.Y=3857mil|Location2.Y=3936.981mil|Absolute=True">Text "Q1" (48.8696mm,46.6598mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4776.063mil|Location2.X=4783.937mil|Location1.Y=3916.063mil|Location2.Y=4003.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4776.063mil|Location2.X=4783.937mil|Location1.Y=3916.063mil|Location2.Y=4003.937mil|Absolute=True">Track (50.292mm,48.006mm)(50.292mm,50.038mm)  Top Overlay</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4653mil|Location2.X=4772.968mil|Location1.Y=4027mil|Location2.Y=4106.981mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4653mil|Location2.X=4772.968mil|Location1.Y=4027mil|Location2.Y=4106.981mil|Absolute=True">Text "R7" (47.3202mm,50.9778mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4776.063mil|Location2.X=5023.937mil|Location1.Y=4096.063mil|Location2.Y=4103.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4776.063mil|Location2.X=5023.937mil|Location1.Y=4096.063mil|Location2.Y=4103.937mil|Absolute=True">Track (50.292mm,52.578mm)(56.388mm,52.578mm)  Top Overlay</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4653mil|Location2.X=4772.968mil|Location1.Y=4027mil|Location2.Y=4106.981mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4653mil|Location2.X=4772.968mil|Location1.Y=4027mil|Location2.Y=4106.981mil|Absolute=True">Text "R7" (47.3202mm,50.9778mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4776.063mil|Location2.X=4783.937mil|Location1.Y=4096.063mil|Location2.Y=4183.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4776.063mil|Location2.X=4783.937mil|Location1.Y=4096.063mil|Location2.Y=4183.937mil|Absolute=True">Track (50.292mm,52.578mm)(50.292mm,54.61mm)  Top Overlay</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4193mil|Location2.X=4312.968mil|Location1.Y=2227mil|Location2.Y=2306.981mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4193mil|Location2.X=4312.968mil|Location1.Y=2227mil|Location2.Y=2306.981mil|Absolute=True">Text "R2" (35.6362mm,5.2578mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4316.063mil|Location2.X=4563.937mil|Location1.Y=2276.063mil|Location2.Y=2283.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4316.063mil|Location2.X=4563.937mil|Location1.Y=2276.063mil|Location2.Y=2283.937mil|Absolute=True">Track (38.608mm,6.35mm)(44.704mm,6.35mm)  Top Overlay</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4193mil|Location2.X=4312.968mil|Location1.Y=2227mil|Location2.Y=2306.981mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4193mil|Location2.X=4312.968mil|Location1.Y=2227mil|Location2.Y=2306.981mil|Absolute=True">Text "R2" (35.6362mm,5.2578mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4316.063mil|Location2.X=4323.937mil|Location1.Y=2276.063mil|Location2.Y=2363.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=F:\facu windows\Electronica Aplicada\Horno\Hard\Modulo Main\Fuente\MODULO CONTROL tentativo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4316.063mil|Location2.X=4323.937mil|Location1.Y=2276.063mil|Location2.Y=2363.937mil|Absolute=True">Track (38.608mm,6.35mm)(38.608mm,8.382mm)  Top Overlay</acronym></a></td>
+</tr>
+</table></a><a href="#top">Back to top</a><br><br></body>
+</html>

@@ -1,0 +1,24 @@
+Removed Member From Class: ClassName=EsquematicoAD Member=+P1
+Removed Member From Class: ClassName=EsquematicoAD Member=+P4
+Removed Member From Class: ClassName=EsquematicoAD Member=-P2
+Removed Member From Class: ClassName=EsquematicoAD Member=-P5
+Added Component: Designator=J1(BORNERA 2)
+Added Component: Designator=J2(BORNERA 2)
+Added Pin To Net: NetName=P1+ Pin=J1-1
+Added Pin To Net: NetName=P1+ Pin=R1-1
+Added Pin To Net: NetName=P1+ Pin=R2-2
+Added Net: Name=P1+
+Added Pin To Net: NetName=P1- Pin=J1-2
+Added Pin To Net: NetName=P1- Pin=R3-2
+Added Pin To Net: NetName=P1- Pin=R4-1
+Added Net: Name=P1-
+Added Pin To Net: NetName=P2+ Pin=J2-1
+Added Pin To Net: NetName=P2+ Pin=R5-1
+Added Pin To Net: NetName=P2+ Pin=R6-2
+Added Net: Name=P2+
+Added Pin To Net: NetName=P2- Pin=J2-2
+Added Pin To Net: NetName=P2- Pin=R7-2
+Added Pin To Net: NetName=P2- Pin=R8-1
+Added Net: Name=P2-
+Added Member To Class: ClassName=EsquematicoAD Member=Component J1 BORNERA 2
+Added Member To Class: ClassName=EsquematicoAD Member=Component J2 BORNERA 2
